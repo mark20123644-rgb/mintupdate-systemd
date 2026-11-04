@@ -1,0 +1,20 @@
+[Unit]
+Description=Linux Mint Update Manager autostart (tray)
+
+[Service]
+Type=simple
+KillMode=process
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=%h/.Xauthority
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=%t/bus
+Environment=XDG_RUNTIME_DIR=%t
+Environment=XDG_CURRENT_DESKTOP=X-Cinnamon
+Environment=XDG_SESSION_TYPE=x11
+Environment=LANG=ru_RU.UTF-8
+ExecStartPre=/bin/sleep 25
+ExecStart=/usr/bin/mintupdate-launcher
+Restart=on-failure
+RestartSec=15
+
+[Install]
+WantedBy=default.target

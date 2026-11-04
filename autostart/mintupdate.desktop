@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Update Manager (disabled)
+Exec=/bin/true
+Hidden=true
+X-GNOME-Autostart-enabled=false
+NoDisplay=true
