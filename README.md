@@ -14,28 +14,26 @@
 
 ## Установка (для других людей)
 
-    через .deb 
-    он чинит для всей системы
+Через `.deb` — он чинит для всей системы. В Linux Mint можно просто дважды кликнуть по файлу `mintupdate-systemd-fix_1.1_all.deb`, либо установить через терминал:
+
+    sudo dpkg -i mintupdate-systemd-fix_1.1_all.deb
+
+Либо `./install.sh` — только для пользователя и не рекомендуется (неудобная установка):
 
     ./install.sh
-    только для пользавателя и несоветуется(неудобная установка)
 
 После ребута подождать ~30 секунд:
 
     systemctl --user status mintupdate-autostart.service --no-pager
     pgrep -afi mintupdate
 
-Ожидаемо: юнит inactive (dead) + status=0/SUCCESS (launcher форкнулся),
-mintUpdate в pgrep — иконка в трее.
+Ожидаемо: юнит `inactive (dead)` + `status=0/SUCCESS` (launcher форкнулся), `mintUpdate` в `pgrep` — иконка в трее.
 
 ## Как это работает
 
 1. XDG-заглушка (Hidden=true) отключает стандартный автозапуск.
-2. systemd unit запускает mintupdate-launcher параллельно сессии,
-   Cinnamon его не ждёт.
-3. KillMode=process — обязателен: launcher форкается, родитель выходит
-   с кодом 0, и без KillMode=process systemd убивает дочерний
-   mintUpdate.py вместе с cgroup.
+2. systemd unit запускает mintupdate-launcher параллельно сессии, Cinnamon его не ждёт.
+3. KillMode=process — обязателен: launcher форкается, родитель выходит с кодом 0, и без KillMode=process systemd убивает дочерний mintUpdate.py вместе с cgroup.
 4. Restart=on-failure + RestartSec=15 — перезапуск при сбое.
 
 ## Настройки
@@ -59,12 +57,9 @@ mintUpdate в pgrep — иконка в трее.
 - ОС: Linux Mint (Cinnamon, X11)
 - Железо: Huawei MateBook D 15 (BOD-WXX9), Intel
 - Дата: 2026-11-04
-- Результат: install.sh + sudo reboot -> mintUpdate поднимается сам,
-  иконка в трее, чёрного экрана нет.
+- Результат: install.sh + sudo reboot -> mintUpdate поднимается сам, иконка в трее, чёрного экрана нет.
 
-Не проверено: другие версии Mint/Cinnamon/systemd, Wayland,
-GNOME/KDE/XFCE, другие дистрибутивы, другие локали, другие версии
-mintupdate.
+Не проверено: другие версии Mint/Cinnamon/systemd, Wayland, GNOME/KDE/XFCE, другие дистрибутивы, другие локали, другие версии mintupdate.
 
 ## Удаление
 
@@ -75,6 +70,5 @@ mintupdate.
 
 ## Лицензия
 
-As is, без гарантий. Автор — марк и искусственный интеллект DeepSeek —
-не несёт ответственности за последствия использования.
+As is, без гарантий. Автор — марк и искусственный интеллект DeepSeek — не несёт ответственности за последствия использования.
 Создано в ноябре 2026.
